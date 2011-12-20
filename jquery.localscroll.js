@@ -27,8 +27,12 @@
   *	- If onBefore returns false, the event is ignored.
  **/
 ;(function( $ ){
-	var URI = location.href.replace(/#.*/,''); // local url without hash
-
+    
+    // local url without hash
+    function URI() {
+        return location.href.replace(/#.*/,''); 
+    };
+    
 	var $localScroll = $.localScroll = function( settings ){
 		$('body').localScroll( settings );
 	};
@@ -87,7 +91,7 @@
 			.end();
 
 		function filter(){// is this a link that points to an anchor and passes a possible filter ? href is checked to avoid a bug in FF.
-			return !!this.href && !!this.hash && this.href.replace(this.hash,'') == URI && (!settings.filter || $(this).is( settings.filter ));
+			return !!this.href && !!this.hash && this.href.replace(this.hash,'') == URI() && (!settings.filter || $(this).is( settings.filter ));
 		};
 	};
 
